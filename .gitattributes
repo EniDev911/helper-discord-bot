@@ -1,0 +1,7 @@
+*           text=auto
+*.txt		text
+*.py        text
+*.vcproj	text eol=crlf
+*.sh		text eol=lf
+*.jpg		-text
+*.png       -text
