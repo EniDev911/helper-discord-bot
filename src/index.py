@@ -19,7 +19,7 @@ bot = commands.Bot(command_prefix=">", description="Este es un bot creado por En
 # ===== read documents
 def read(document: str):
 	dirname = os.path.dirname(__file__)
-	with open(os.path.join(dirname+'/papers', document) ,'r') as file:
+	with open(os.path.join(dirname+'/papers', document) ,'r', encoding='utf-8') as file:
 		f = file.read()
 		return f
 
@@ -27,8 +27,11 @@ def read(document: str):
 @bot.command()
 async def ejemplo(ctx, *, search: str):
 	result = search.strip()
-	file = read('js/'+result+'.md')
-	await ctx.send(file);
+	try:
+		file = read('js/'+result+'.md')
+		await ctx.send(file)
+	except FileNotFoundError as err:
+		await ctx.send("**No encontre coincidencia**") 
 
 # ===== youtube get popular video
 @bot.command()
@@ -102,5 +105,6 @@ async def on_ready():
 	print("My boot is Ready")
 
 # require token
-bot.run(TOKEN) 
+bot.run("OTk2OTEwNjAwODg0MDcyNDg5.GId4xO.juNy0OjAwfv9RIoJeIIZCVIepS9QE5eTeYIXJ0") 
+#bot.run(os.environ["DISCORD_TOKEN"])
 
