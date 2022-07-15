@@ -1,11 +1,11 @@
-#---------------------------------------#
-#        Module: main					|
-#        Author: Marco Contreras		|
-#         Email: enidev911@gmail.com 	|
-# 										|
-#     Copyright: (c) EniDev911			|
-#       Licence: GPL 3.0 				|
-#---------------------------------------#
+#---------------------------------------
+#        Module: main										
+#        Author: Marco Contreras		
+#         Email: enidev911@gmail.com 	
+# 										
+#     Copyright: (c) EniDev911			
+#       Licence: GPL 3.0 				
+#---------------------------------------
 
 import discord
 from discord.ext import commands
