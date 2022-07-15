@@ -23,7 +23,14 @@ def read(document: str):
 		f = file.read()
 		return f
 
+# ==== show examples
+@bot.command()
+async def ejemplo(ctx, *, search: str):
+	result = search.strip()
+	file = read('js/'+result+'.md')
+	await ctx.send(file);
 
+# ===== youtube get popular video
 @bot.command()
 async def yt(ctx, *, search):
 	query_string = parse.urlencode({'search_query': search})
@@ -31,6 +38,26 @@ async def yt(ctx, *, search):
 	results = re.findall('\"\\/watch\\?v=(.{11})', html_content.read().decode())
 	#print(results)
 	await ctx.send('https://youtube.com/watch?v='+results[0])
+
+# ===== js get mdn reference
+# @bot.command()
+# async def js(ctx, *, search):
+# 	query_string = parse.urlencode({'search_query': search})
+# 	embed = discord.Embed(
+# 		title = 'Title',
+# 		description = 'This is a description',
+# 		timestamp=datetime.datetime.utcnow(),
+# 		color=0xf9f06b
+# 		)
+# 	embed.set_footer(text='This is a footer')
+# 	embed.set_image(url='https://raw.githubusercontent.com/EniDev911/enidev911_guides/main/assets/png/prompt.png')
+# 	embed.set_thumbnail(url='https://raw.githubusercontent.com/EniDev911/enidev911_guides/main/assets/png/prompt.png')
+# 	embed.set_author(name='EniDev911', icon_url='https://avatars.githubusercontent.com/u/70834807?v=4')
+# 	embed.add_field(name='Field name', value='Field value', inline=False)
+# 	embed.add_field(name='Field name', value='Field value', inline=True)
+# 	embed.add_field(name='Field name', value='Field value', inline=True)
+
+# 	await ctx.send(embed=embed)
 
 
 @bot.command()
@@ -53,23 +80,6 @@ async def echo(ctx):
 				   "echo 'Soy LUNA'"+\
 				   "```");
 
-@bot.command()
-async def info(ctx):
-	embed = discord.Embed(
-		title = 'Title',
-		description = 'This is a description',
-		timestamp=datetime.datetime.utcnow(),
-		color=0xf9f06b
-		)
-	embed.set_footer(text='This is a footer')
-	embed.set_image(url='https://raw.githubusercontent.com/EniDev911/enidev911_guides/main/assets/png/prompt.png')
-	embed.set_thumbnail(url='https://raw.githubusercontent.com/EniDev911/enidev911_guides/main/assets/png/prompt.png')
-	embed.set_author(name='EniDev911', icon_url='https://avatars.githubusercontent.com/u/70834807?v=4')
-	embed.add_field(name='Field name', value='Field value', inline=False)
-	embed.add_field(name='Field name', value='Field value', inline=True)
-	embed.add_field(name='Field name', value='Field value', inline=True)
-
-	await ctx.send(embed=embed)
 
 # Events
 # ==========
@@ -90,6 +100,7 @@ async def info(ctx):
 async def on_ready():
 	await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Un comando"))
 	print("My boot is Ready")
+
 # require token
-bot.run("OTk2OTEwNjAwODg0MDcyNDg5.G6fHIr.4HTJgkPjAK99b_G1AokE1-y-ldFrKA_a1O5uV0") 
+bot.run(TOKEN) 
 
