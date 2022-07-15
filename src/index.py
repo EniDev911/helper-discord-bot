@@ -104,7 +104,6 @@ async def on_ready():
 	await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Un comando"))
 	print("My boot is Ready")
 
-# require token
-bot.run("OTk2OTEwNjAwODg0MDcyNDg5.GId4xO.juNy0OjAwfv9RIoJeIIZCVIepS9QE5eTeYIXJ0") 
-#bot.run(os.environ["DISCORD_TOKEN"])
+# require token 
+bot.run(os.environ["DISCORD_TOKEN"])
 
