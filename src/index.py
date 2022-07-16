@@ -45,10 +45,6 @@ async def playlist(ctx):
 	await ctx.send(ctx.guild.name)
 	
 
-
-	#else:<
-#		print("No existe canal")
-
 @bot.command(pass_context=True)
 async def button(ctx):
 	await ctx.send(
@@ -195,6 +191,6 @@ async def on_ready():
 	await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Un comando"))
 	print("My boot is Ready")
 
-# require token 
-#bot.run(os.environ["DISCORD_TOKEN"])
-bot.run("OTk2OTEwNjAwODg0MDcyNDg5.GXXWG6.sUyoM0XK4H5FTiebdqlWTp-HEOvgsBN14Z3sT8")
+if __name__ == "__main__":
+	bot.run(os.environ["DISCORD_TOKEN"])
+
