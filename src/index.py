@@ -7,21 +7,99 @@
 #       Licence: GPL 3.0 				
 #---------------------------------------
 
+from dis import disco
 import discord
 from discord.ext import commands
+from discord_components import (
+	Button, 
+	ButtonStyle,
+	DiscordComponents, 
+	Select, 
+	SelectOption
+)
+import asyncio
 import os
 import datetime 
 from urllib import parse, request
 import re
+import webbrowser
 
+# intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=">", description="Este es un bot creado por EniDev911")
 
-# ===== read documents
+DiscordComponents(bot)
+
+# GLOBAL
+BASE_DIR = os.path.dirname(__file__)
+
+
+
+@bot.command()
+async def playlist(ctx):
+	channel = discord.utils.get(ctx.guild.channels, name="hydra-song-requests")
+	#channel = bot.get_channel(int(channel.id))
+	#await channel.send("pokemon")
+	
+	await bot.get_channel(int(channel.id)).send("play pokemon", file=discord.File(os.path.join(BASE_DIR,"img")+"/logo_con_bg.png"))
+	# print(os.path.join(BASE_DIR, "img")+"/logo_con_bg.png")
+	await ctx.send(ctx.guild.name)
+	
+
+
+	#else:<
+#		print("No existe canal")
+
+@bot.command(pass_context=True)
+async def button(ctx):
+	await ctx.send(
+		"ABRIR EN CODEPEN",
+		components = [
+
+			Button(style= ButtonStyle.black, emoji="🧑🏽‍💻", label="ABRIR EN CODEPEN",
+			custom_id = "button1")
+		])
+
+	interaction = await bot.wait_for(
+		"button_click", check = lambda inter: inter.custom_id == "button1"
+		)
+	google = webbrowser.open("http://www.github.com/EniDev911")
+	await interaction.send(content = google, ephemeral=False)
+	
+
+@bot.command()
+async def select(ctx):
+    await ctx.send(
+        "Selects!",
+        components=[
+            Select(
+                placeholder="Select something!",
+                options=[
+                    SelectOption(label="a", value="a"),
+                    SelectOption(label="b", value="b"),
+                ],
+                custom_id="select1",
+            )
+        ],
+    )
+
+
+@bot.event
+async def on_select_option(interaction):
+	if interaction.values[0] == "prompt":
+		print("prompt")
+    
+	await interaction.respond(content=f"{interaction.values[0]} selected!") 
+
+# ===== read document
 def read(document: str):
-	dirname = os.path.dirname(__file__)
-	with open(os.path.join(dirname+'/papers', document) ,'r', encoding='utf-8') as file:
-		f = file.read()
-		return f
+
+	with open(os.path.join(BASE_DIR+'/papers', document) ,'r', encoding='utf-8') as file:
+		file_clean = ""
+		for readline in file:
+			line_strip = readline.lstrip("\n")
+			file_clean += line_strip
+		return file_clean
+	
 
 # ==== show examples
 @bot.command()
@@ -30,6 +108,19 @@ async def ejemplo(ctx, *, search: str):
 	try:
 		file = read('js/'+result+'.md')
 		await ctx.send(file)
+		await ctx.send(
+		"ABRIR EN CODEPEN",
+		components = [
+
+			Button(style= ButtonStyle.blue, emoji="🧑🏽‍💻", label="ABRIR EN CODEPEN",
+			custom_id = "button1")
+		])
+
+		interaction = await bot.wait_for(
+		"button_click", check = lambda inter: inter.custom_id == "button1"
+		)
+		
+		await interaction.send(content = webbrowser.open(f"http://www.github.com/EniDev911"), ephemeral=True)
 	except FileNotFoundError as err:
 		await ctx.send("**No encontre coincidencia**") 
 
@@ -81,7 +172,7 @@ async def echo(ctx):
 	await ctx.send("Sirve para imprimir por la salida estándar una expresión:" +\
 				   "```bash\n"+\
 				   "echo 'Soy LUNA'"+\
-				   "```");
+				   "```")
 
 
 # Events
@@ -105,5 +196,5 @@ async def on_ready():
 	print("My boot is Ready")
 
 # require token 
-bot.run(os.environ["DISCORD_TOKEN"])
-
+#bot.run(os.environ["DISCORD_TOKEN"])
+bot.run("OTk2OTEwNjAwODg0MDcyNDg5.GXXWG6.sUyoM0XK4H5FTiebdqlWTp-HEOvgsBN14Z3sT8")
