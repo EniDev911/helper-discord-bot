@@ -111,7 +111,7 @@ async def ejemplo(ctx, *, search: str):
 
 @bot.command()
 async def font(ctx, *, search: str):
-	result = search.strip()
+	result = search.strip().replace(" ", "")
 	try:
 		file = read('fonts/'+result.lower()+'.md')
 		await ctx.send(file)
