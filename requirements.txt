@@ -10,4 +10,3 @@ typing-extensions==3.10.0.2
 yarl==1.5.1
 discord-components==2.1.2
 python-dotenv==0.20.0
-typing_extensions==4.3.0
