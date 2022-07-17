@@ -7,7 +7,7 @@
 #       Licence: GPL 3.0 				
 #---------------------------------------
 
-from dis import disco
+from dotenv import load_dotenv, find_dotenv
 import discord
 from discord.ext import commands
 from discord_components import (
@@ -23,6 +23,9 @@ import datetime
 from urllib import parse, request
 import re
 import webbrowser
+from utilities.colors import * 
+from utilities.settings import DISCORD
+from utilities.searcher import *
 
 # intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=">", description="Este es un bot creado por EniDev911")
@@ -31,6 +34,36 @@ DiscordComponents(bot)
 
 # GLOBAL
 BASE_DIR = os.path.dirname(__file__)
+
+# get youtube
+@bot.command()
+async def yt(ctx, *, search):
+	await ctx.send(youtube(search))
+
+# get google font
+# @bot.command()
+# async def gf(ctx, *, font):
+# 	await ctx.send(google_font())
+
+
+@bot.command()
+async def emb(ctx):
+	embed = discord.Embed(
+		title = 'Codepen',
+		description = 'Open in codepen',
+		url = 'https://codepen.io/EniDev911/pen/jOzVzeK',
+		timestamp=datetime.datetime.utcnow(),
+		color=blue
+		)
+	embed.set_footer(text='This is a footer')
+	embed.set_image(url='https://badges.aleen42.com/src/codepen.svg')
+	embed.set_thumbnail(url='https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/96/000000/external-multi-platform-online-code-editor-and-open-source-learning-service-logo-shadow-tal-revivo.png')
+	embed.set_author(name='Codepen', icon_url='https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-Black-Large.png')
+	embed.add_field(name='Field name', value='Field value', inline=False)
+	embed.add_field(name='Field name', value='Field value', inline=True)
+	embed.add_field(name='Field name', value='Field value', inline=True)
+
+	await ctx.send(embed=embed)
 
 
 
@@ -45,38 +78,6 @@ async def playlist(ctx):
 	await ctx.send(ctx.guild.name)
 	
 
-@bot.command(pass_context=True)
-async def button(ctx):
-	await ctx.send(
-		"ABRIR EN CODEPEN",
-		components = [
-
-			Button(style= ButtonStyle.black, emoji="🧑🏽‍💻", label="ABRIR EN CODEPEN",
-			custom_id = "button1")
-		])
-
-	interaction = await bot.wait_for(
-		"button_click", check = lambda inter: inter.custom_id == "button1"
-		)
-	google = webbrowser.open("http://www.github.com/EniDev911")
-	await interaction.send(content = google, ephemeral=False)
-	
-
-@bot.command()
-async def select(ctx):
-    await ctx.send(
-        "Selects!",
-        components=[
-            Select(
-                placeholder="Select something!",
-                options=[
-                    SelectOption(label="a", value="a"),
-                    SelectOption(label="b", value="b"),
-                ],
-                custom_id="select1",
-            )
-        ],
-    )
 
 
 @bot.event
@@ -104,71 +105,38 @@ async def ejemplo(ctx, *, search: str):
 	try:
 		file = read('js/'+result+'.md')
 		await ctx.send(file)
-		await ctx.send(
-		"ABRIR EN CODEPEN",
-		components = [
 
-			Button(style= ButtonStyle.blue, emoji="🧑🏽‍💻", label="ABRIR EN CODEPEN",
-			custom_id = "button1")
-		])
-
-		interaction = await bot.wait_for(
-		"button_click", check = lambda inter: inter.custom_id == "button1"
-		)
-		
-		await interaction.send(content = webbrowser.open(f"http://www.github.com/EniDev911"), ephemeral=True)
 	except FileNotFoundError as err:
 		await ctx.send("**No encontre coincidencia**") 
 
-# ===== youtube get popular video
 @bot.command()
-async def yt(ctx, *, search):
-	query_string = parse.urlencode({'search_query': search})
-	html_content = request.urlopen("http://www.youtube.com/results?"+query_string)
-	results = re.findall('\"\\/watch\\?v=(.{11})', html_content.read().decode())
-	#print(results)
-	await ctx.send('https://youtube.com/watch?v='+results[0])
+async def font(ctx, *, search: str):
+	result = search.strip()
+	try:
+		file = read('fonts/'+result.lower()+'.md')
+		await ctx.send(file)
 
-# ===== js get mdn reference
-# @bot.command()
-# async def js(ctx, *, search):
-# 	query_string = parse.urlencode({'search_query': search})
-# 	embed = discord.Embed(
-# 		title = 'Title',
-# 		description = 'This is a description',
-# 		timestamp=datetime.datetime.utcnow(),
-# 		color=0xf9f06b
-# 		)
-# 	embed.set_footer(text='This is a footer')
-# 	embed.set_image(url='https://raw.githubusercontent.com/EniDev911/enidev911_guides/main/assets/png/prompt.png')
-# 	embed.set_thumbnail(url='https://raw.githubusercontent.com/EniDev911/enidev911_guides/main/assets/png/prompt.png')
-# 	embed.set_author(name='EniDev911', icon_url='https://avatars.githubusercontent.com/u/70834807?v=4')
-# 	embed.add_field(name='Field name', value='Field value', inline=False)
-# 	embed.add_field(name='Field name', value='Field value', inline=True)
-# 	embed.add_field(name='Field name', value='Field value', inline=True)
-
-# 	await ctx.send(embed=embed)
+	except FileNotFoundError as err:
+		await ctx.send("**No encontre coincidencia**") 
 
 
-@bot.command()
-async def help_(ctx):
-	await ctx.send('Lista un comando para ver ejemplo'+\
-		           '- pwd\n' +\
-		           '- echo\n');
 
+async def get_embed():
+	embed = discord.Embed(
+		title = 'Title',
+		description = 'This is a description',
+		timestamp=datetime.datetime.utcnow(),
+		color=0xf9f06b
+	)
+	embed.set_footer(text='This is a footer')
+	embed.set_image(url='https://raw.githubusercontent.com/EniDev911/enidev911_guides/main/assets/png/prompt.png')
+	embed.set_thumbnail(url='https://raw.githubusercontent.com/EniDev911/enidev911_guides/main/assets/png/prompt.png')
+	embed.set_author(name='EniDev911', icon_url='https://avatars.githubusercontent.com/u/70834807?v=4')
+	embed.add_field(name='Field name', value='Field value', inline=False)
+	embed.add_field(name='Field name', value='Field value', inline=True)
+	embed.add_field(name='Field name', value='Field value', inline=True)
+	return embed
 
-@bot.command()
-async def ls(ctx):
-	file = read('ls_command.md')
-	await ctx.send(file);
-
-
-@bot.command()
-async def echo(ctx):
-	await ctx.send("Sirve para imprimir por la salida estándar una expresión:" +\
-				   "```bash\n"+\
-				   "echo 'Soy LUNA'"+\
-				   "```")
 
 
 # Events
@@ -192,5 +160,8 @@ async def on_ready():
 	print("My boot is Ready")
 
 if __name__ == "__main__":
+	#e = Embed("hello", "description", None, 0x1f6e9e)
+	print(youtube("hello"))
+	print(DISCORD["version"])
+	load_dotenv(find_dotenv())
 	bot.run(os.environ["DISCORD_TOKEN"])
-

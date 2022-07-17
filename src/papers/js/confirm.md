@@ -1,16 +1,15 @@
-**DESCRIPCIÓN** 📍
-```text
-El método window.confirm() muestra un cuadro de diálogo modal con un mensaje opcional y dos botones Aceptar/Cancelar
+```fix
+El método 𝘸𝘪𝘯𝘥𝘰𝘸.𝘤𝘰𝘯𝘧𝘪𝘳𝘮() muestra un cuadro de diálogo modal con un mensaje opcional y dos botones Aceptar/Cancelar
 ```
-**SINTAXIS** 📍
+🆂🅸🅽🆃🅰🆇🅸🆂 📍
 ```js
 confirm([message])
 ```
-**ARGUMENTOS** 📍
-```text
-🔸 message: El texto que mostrará el cuadro de diálogo emergente (opcional)
+🅰🆁🅶🆄🅼🅴🅽🆃🅾🆂 📍
+```c
+🔸 message: "El texto que mostrará el cuadro de diálogo emergente"
 ```
-**EJEMPLO** 📍
+🅴🅹🅴🅼🅿🅻🅾 📍
 ```js
 /**
  * Esta función valida la acción del usuario.

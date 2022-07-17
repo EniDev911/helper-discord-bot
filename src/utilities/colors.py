@@ -1,0 +1,5 @@
+yellow = 0xf9f06b
+purple = 0x9141ac
+blue = 0x2197fd
+pink = 0xff0090
+orange = 0xfe6709
