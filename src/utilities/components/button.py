@@ -1,3 +1,8 @@
+from ..setting import BASE_DIR
+
+print(BASE_DIR)
+
+
 # @bot.command(pass_context=True)
 # async def button(ctx):
 # 	await ctx.send(

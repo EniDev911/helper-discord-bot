@@ -24,26 +24,41 @@ from urllib import parse, request
 import re
 import webbrowser
 from utilities.colors import * 
-from utilities.settings import DISCORD
+from utilities.settings import DISCORD, BASE_DIR
 from utilities.searcher import *
+from utilities.files import read
 
 # intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=">", description="Este es un bot creado por EniDev911")
 
 DiscordComponents(bot)
 
-# GLOBAL
-BASE_DIR = os.path.dirname(__file__)
-
 # get youtube
 @bot.command()
 async def yt(ctx, *, search):
 	await ctx.send(youtube(search))
 
-# get google font
-# @bot.command()
-# async def gf(ctx, *, font):
-# 	await ctx.send(google_font())
+# get fonts
+@bot.command()
+async def font(ctx, *, search: str):
+	result = search.strip().replace(" ", "")
+	try:
+		file = read('fonts/'+result.lower()+'.md')
+		await ctx.send(file)
+	except FileNotFoundError as err:
+		await ctx.send("**No encontre coincidencia**") 
+
+# get examples
+@bot.command()
+async def refe(ctx, *, search: str):
+	result = search.strip()
+	try:
+		file = read('js/'+result+'.md')
+		await ctx.send(file)
+
+	except FileNotFoundError as err:
+		await ctx.send("**No encontre coincidencia**") 
+
 
 
 @bot.command()
@@ -71,7 +86,6 @@ async def emb(ctx):
 async def playlist(ctx):
 	channel = discord.utils.get(ctx.guild.channels, name="hydra-song-requests")
 	#channel = bot.get_channel(int(channel.id))
-	#await channel.send("pokemon")
 	
 	await bot.get_channel(int(channel.id)).send("play pokemon", file=discord.File(os.path.join(BASE_DIR,"img")+"/logo_con_bg.png"))
 	# print(os.path.join(BASE_DIR, "img")+"/logo_con_bg.png")
@@ -87,37 +101,7 @@ async def on_select_option(interaction):
     
 	await interaction.respond(content=f"{interaction.values[0]} selected!") 
 
-# ===== read document
-def read(document: str):
 
-	with open(os.path.join(BASE_DIR+'/papers', document) ,'r', encoding='utf-8') as file:
-		file_clean = ""
-		for readline in file:
-			line_strip = readline.lstrip("\n")
-			file_clean += line_strip
-		return file_clean
-	
-
-# ==== show examples
-@bot.command()
-async def ejemplo(ctx, *, search: str):
-	result = search.strip()
-	try:
-		file = read('js/'+result+'.md')
-		await ctx.send(file)
-
-	except FileNotFoundError as err:
-		await ctx.send("**No encontre coincidencia**") 
-
-@bot.command()
-async def font(ctx, *, search: str):
-	result = search.strip().replace(" ", "")
-	try:
-		file = read('fonts/'+result.lower()+'.md')
-		await ctx.send(file)
-
-	except FileNotFoundError as err:
-		await ctx.send("**No encontre coincidencia**") 
 
 
 
@@ -163,5 +147,6 @@ if __name__ == "__main__":
 	#e = Embed("hello", "description", None, 0x1f6e9e)
 	print(youtube("hello"))
 	print(DISCORD["version"])
+	print(BASE_DIR)
 	load_dotenv(find_dotenv())
 	bot.run(os.environ["DISCORD_TOKEN"])
