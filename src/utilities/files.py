@@ -1,6 +1,6 @@
 import os
 from .settings import PAPERS
-     
+import zipfile     
 
 # ===== read and clean document
 def read(document: str):

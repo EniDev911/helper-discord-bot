@@ -33,6 +33,3 @@ apellido = prompt("¿Cuál es tu apellido?", "apellido");
 
 saludarUsuario(nombre, apellido);
 ```
-
-🅲🅾🅳🅴🅿🅴🅽 👇
-https://codepen.io/EniDev911/pen/jOzVzeK ⚓
