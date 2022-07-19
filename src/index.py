@@ -36,9 +36,14 @@ bot = commands.Bot(command_prefix="!", description="Este es un bot creado por En
 DiscordComponents(bot)
 
 # get youtube
-@bot.command()
-async def yt(ctx, *, search):
-	await ctx.send(youtube(search))
+@bot.command(name="yt")
+async def youtube(ctx, *, search):
+	await ctx.send(youtube_search(search))
+
+# get google
+@bot.command(name="gg")
+async def google(ctx, *, search):
+	await ctx.send(f"⚓ {''.join(google_search(search))}")
 
 # get fonts
 @bot.command()
@@ -57,6 +62,7 @@ async def javascript(ctx, *, search: str):
 	try:
 		file = read('js/'+result+'.md')
 		await ctx.send(file)
+		await ctx.message.author.send(file)
 
 	except FileNotFoundError as err:
 		await ctx.send("**No encontre coincidencia**") 
@@ -81,6 +87,10 @@ async def emb(ctx):
 	#discord.Embed.from_dict(embed_dict)
 	await ctx.send(embed=emb)
 
+@bot.command(name="info")
+async def info_server(ctx):
+	await ctx.send(embed=info(ctx))
+
 
 
 @bot.command()
@@ -92,6 +102,10 @@ async def playlist(ctx):
 	# print(os.path.join(BASE_DIR, "img")+"/logo_con_bg.png")
 	await ctx.send(ctx.guild.name)
 	
+
+@bot.command()
+async def ping(ctx):
+	await ctx.send(f"🏓 pong con {str(round(bot.latency, 2))} de latencia")
 
 
 

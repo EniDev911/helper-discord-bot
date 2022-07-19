@@ -1,24 +1,23 @@
 import discord
 import datetime
-from ..url import logo
+from ..url import LOGO
+from ..colors import *
 
 class Embed:
-    def __init__(self, title: str, description: str,url=None, logo=None, color=0x1f6e9e):
+    def __init__(self, title: str, description: str,url=None, color=0x1f6e9e):
         self.embed_title = title
         self.embed_description = description
         self.url = url
-        self.embed_logo = logo
         self.embed_color = color
         self.timestamp = datetime.datetime.utcnow()
         self.embed = discord.Embed(title= self.embed_title, 
                                     description= self.embed_description,
                                     timestamp= self.timestamp, 
                                     color= self.embed_color)
-    def create(self, name, icon):
-        self.embed.set_author(name=name, icon_url= logo+icon)
-        self.embed.set_thumbnail(url=logo+icon)
+    def create(self, name, logo):
+        self.embed.set_author(name=name, icon_url=logo)
+        self.embed.set_thumbnail(url=logo)
         self.embed.set_footer(text=name)
-
         
     def add_field(self, name, value, inline=True):
         self.embed.add_field(name=name, value=value, inline=inline)
@@ -34,12 +33,18 @@ embed_bootstrap = Embed(
 embed_bootstrap.create("bootstrap", "bootstrap-5.png")
 embed_bootstrap.add_field("example", "Test value", False)
 
-# This is the user input
-# user_input = {'field name': 'some name', 'field value': 'some value'}
+def info(ctx):
+    emb_info =  Embed(
+    title = f"{ctx.guild.name}",
+    description = "Servidor para ayudar y jugar",
+    color=orange)
+    emb_info.create(f"{ctx.guild.owner}", f"{ctx.guild.icon_url}")
+    emb_info.add_field("Servidor creado el:", f"{ctx.guild.created_at.strftime('%Y-%m-%d')}")
+    emb_info.add_field("Servidor Región:", f"{ctx.guild.region}")
+    emb_info.add_field("Servidor ID:", f"{ctx.guild.id}")
+    return emb_info
 
-# # Getting the embed and converting it to a dict
-# embed = message.embeds[0]
-# embed_dict = embed.to_dict()
+
 
 # for field in embed_dict['fields']:
 #     if field['name'] == user_input['field name']:
