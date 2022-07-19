@@ -25,7 +25,7 @@ import re
 import webbrowser
 from utilities.colors import * 
 from utilities.settings import DISCORD, BASE_DIR
-from utilities.components.embed import Embed
+from utilities.components.embed import *
 from utilities.searcher import *
 from utilities.files import read
 from colorama import Fore
@@ -61,27 +61,25 @@ async def javascript(ctx, *, search: str):
 	except FileNotFoundError as err:
 		await ctx.send("**No encontre coincidencia**") 
 
+# get boostrap references
+@bot.command(name="bs")
+async def bootstrap(ctx, *, search: str):
+	result = search.strip()
+	try:
+		file = read('bs/'+result+'.md')
+		await ctx.send(file)
+
+	except FileNotFoundError as err:
+		await ctx.send("**No encontre coincidencia**") 
+
 
 @bot.command()
 async def emb(ctx):
 	# file = read('fonts/firacode.md')
-	# embed = discord.Embed(
-	# 	title = 'Codepen',
-	# 	description = 'Open in codepen',
-	# 	url = 'https://codepen.io/EniDev911/pen/jOzVzeK',
-	# 	timestamp=datetime.datetime.utcnow(),
-	# 	color=blue
-	# 	)
-	# embed.set_footer(text='This is a footer')
-	# embed.set_image(url='https://badges.aleen42.com/src/codepen.svg')
-	# embed.set_thumbnail(url='https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/96/000000/external-multi-platform-online-code-editor-and-open-source-learning-service-logo-shadow-tal-revivo.png')
-	# embed.set_author(name='Codepen', icon_url='https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-Black-Large.png')
-	# embed.add_field(name='Field `localstorage`', value=file, inline=False)
-	# embed.add_field(name='Field `localstorage`', value='```html\n<h1>HelloWorld</h1>\n```', inline=False)
-	# embed.add_field(name='Field name', value='Field value', inline=True)
-	# embed.add_field(name='Field name', value='Field value', inline=True)
-	e = Embed("hello", "description", None, yellow)
-	await ctx.send(embed=e)
+	emb = embed_bootstrap
+	#print(emb.to_dict())
+	#discord.Embed.from_dict(embed_dict)
+	await ctx.send(embed=emb)
 
 
 
