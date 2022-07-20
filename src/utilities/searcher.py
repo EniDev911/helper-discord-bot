@@ -9,6 +9,7 @@ def youtube_search(query):
 	results = re.findall('\"\\/watch\\?v=(.{11})', html_content.read().decode())
 	return 'https://youtube.com/watch?v='+results[0]
 
+
 # get google results
 def google_search(query):
 	return list(search(query, start=0, stop=1, lang="es"))

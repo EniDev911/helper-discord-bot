@@ -26,12 +26,6 @@ class Embed:
         return self.embed.to_dict()
 
 
-embed_bootstrap = Embed(
-    title = 'Bootstrap', 
-    description = 'source: getbootstrap.com/docs/5.2/utilities/text/',
-    url = 'https://raw.githubusercontent.com/EniDev911/assets/main/galery/svg/logos/bootstrap-5.svg')
-embed_bootstrap.create("bootstrap", "bootstrap-5.png")
-embed_bootstrap.add_field("example", "Test value", False)
 
 def info(ctx):
     emb_info =  Embed(
@@ -45,6 +39,14 @@ def info(ctx):
     return emb_info
 
 
+
+
+embed_bootstrap = Embed(
+    title = 'Bootstrap', 
+    description = 'source: getbootstrap.com/docs/5.2/utilities/text/',
+    url = 'https://raw.githubusercontent.com/EniDev911/assets/main/galery/svg/logos/bootstrap-5.svg')
+embed_bootstrap.create("bootstrap", "bootstrap-5.png")
+embed_bootstrap.add_field("example", "Test value", False)
 
 # for field in embed_dict['fields']:
 #     if field['name'] == user_input['field name']:

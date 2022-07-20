@@ -8,7 +8,7 @@ Una forma sencilla de obtener una entrada de un usuario mediante el método => �
 prompt(text, [default])
 ```
 
-🅰🆁🅶🆄🅼🅴🅽🆃🅾🆂 📍
+🅿🅰🆁🅰🅼🅴🆃🆁🅾🆂 📍
 
 ```r
 🔸𝙩𝙚𝙭𝙩: "El texto que mostrará el cuadro de diálogo emergente"

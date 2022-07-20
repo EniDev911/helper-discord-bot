@@ -8,6 +8,7 @@
 #---------------------------------------
 
 from dotenv import load_dotenv, find_dotenv
+from tkinter import filedialog
 import discord
 from discord.ext import commands
 from discord_components import (
@@ -33,7 +34,11 @@ from colorama import Fore
 # intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", description="Este es un bot creado por EniDev911")
 
-DiscordComponents(bot)
+# ready
+@bot.event
+async def on_ready():
+	await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Un comando"))
+	print(f"{Fore.YELLOW}Bot logged as {Fore.RED}{bot.user}")
 
 # get youtube
 @bot.command(name="yt")
@@ -80,17 +85,18 @@ async def bootstrap(ctx, *, search: str):
 
 
 @bot.command()
-async def emb(ctx):
+async def env(ctx):
 	# file = read('fonts/firacode.md')
-	emb = embed_bootstrap
+	#emb = embed_bootstrap
 	#print(emb.to_dict())
 	#discord.Embed.from_dict(embed_dict)
-	await ctx.send(embed=emb)
+	f = filedialog.askopenfilename(initialdir="/")
+
+	await ctx.send(file=discord.File(f))
 
 @bot.command(name="info")
 async def info_server(ctx):
 	await ctx.send(embed=info(ctx))
-
 
 
 @bot.command()
@@ -108,7 +114,6 @@ async def ping(ctx):
 	await ctx.send(f"🏓 pong con {str(round(bot.latency, 2))} de latencia")
 
 
-
 @bot.event
 async def on_select_option(interaction):
 	if interaction.values[0] == "prompt":
@@ -118,29 +123,9 @@ async def on_select_option(interaction):
 
 
 
-# Events
-# ==========
-# Setting `Playing ` status
-# await bot.change_presence(activity=discord.Game(name="a game"))
-
-# Setting `Streaming ` status
-# await bot.change_presence(activity=discord.Streaming(name="My Stream", url=my_twitch_url))
-
-# Setting `Listening ` status
-# await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="a song"))
-
-# Setting `Watching ` status
-# await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="a movie"))
-
-
-@bot.event
-async def on_ready():
-	await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Un comando"))
-	print(f"{Fore.YELLOW}Bot logged as {Fore.RED}{bot.user}")
 
 if __name__ == "__main__":
-	e = Embed("hello", "description", None, 0x1f6e9e)
-	print(e.to_dict())
 	print(DISCORD["version"])
 	load_dotenv(find_dotenv())
+	DiscordComponents(bot)
 	bot.run(os.environ["DISCORD_TOKEN"])
