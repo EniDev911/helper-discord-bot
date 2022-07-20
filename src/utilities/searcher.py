@@ -12,5 +12,5 @@ def youtube_search(query):
 
 # get google results
 def google_search(query):
-	return list(search(query, start=0, stop=1, lang="es"))
+	return list(search(query, start=0, stop=1, lang="es"))[0]
 	

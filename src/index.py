@@ -48,17 +48,13 @@ async def youtube(ctx, *, search):
 # get google
 @bot.command(name="gg")
 async def google(ctx, *, search):
-	await ctx.send(f"⚓ {''.join(google_search(search))}")
+	await ctx.send(f"⚓ {google_search(search)}")
 
 # get fonts
 @bot.command()
 async def font(ctx, *, search: str):
-	result = search.strip().replace(" ", "")
-	try:
-		file = read('fonts/'+result.lower()+'.md')
-		await ctx.send(file)
-	except FileNotFoundError as err:
-		await ctx.send("**No encontre coincidencia**") 
+	file = read('fonts/'+search)
+	await ctx.send(file)
 
 # get js references
 @bot.command(name="js")
