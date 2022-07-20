@@ -8,7 +8,7 @@
 #---------------------------------------
 
 from dotenv import load_dotenv, find_dotenv
-from tkinter import filedialog
+#from tkinter import filedialog problem with heroku
 import discord
 from discord.ext import commands
 from discord_components import (
