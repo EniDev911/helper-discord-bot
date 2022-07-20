@@ -86,9 +86,9 @@ async def env(ctx):
 	#emb = embed_bootstrap
 	#print(emb.to_dict())
 	#discord.Embed.from_dict(embed_dict)
-	f = filedialog.askopenfilename(initialdir="/")
-
-	await ctx.send(file=discord.File(f))
+	#f = filedialog.askopenfilename(initialdir="/")
+	#await ctx.send(file=discord.File(f))
+	pass
 
 @bot.command(name="info")
 async def info_server(ctx):
