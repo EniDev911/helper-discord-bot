@@ -4,3 +4,5 @@ tk-dev
 python3.8-tk
 xclip
 xsel
+gtk
+PyQt4
