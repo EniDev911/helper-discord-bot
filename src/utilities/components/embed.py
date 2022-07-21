@@ -1,7 +1,6 @@
 import discord
 import datetime
 from ..url import LOGO
-from ..colors import *
 
 class Embed:
     def __init__(self, title: str, description: str,url=None, color=0x1f6e9e):

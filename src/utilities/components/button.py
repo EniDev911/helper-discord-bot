@@ -1,38 +1,49 @@
-from ..setting import BASE_DIR
+from ast import literal_eval
+from ..settings import BASE_DIR
+import discord
+import discord_components
+from discord_components import (
+	Button,
+	ButtonStyle,
+	Select, 
+	SelectOption
+)
+import asyncio
+import pyperclip as pc
+from ..formatter import format_text
 
-print(BASE_DIR)
+blue = ButtonStyle.blue
+green = ButtonStyle.green
+# emojis : "📋"
 
-
-# @bot.command(pass_context=True)
-# async def button(ctx):
-# 	await ctx.send(
-# 		"ABRIR EN CODEPEN",
-# 		components = [
-
-# 			Button(style= ButtonStyle.black, emoji="🧑🏽‍💻", label="ABRIR EN CODEPEN",
-# 			custom_id = "button1")
-# 		])
-
-# 	interaction = await bot.wait_for(
-# 		"button_click", check = lambda inter: inter.custom_id == "button1"
-# 		)
-# 	google = webbrowser.open("https://codepen.io/EniDev911/pen/jOzVzeK ")
-# 	await interaction.send(content = google, ephemeral=False)
-# 	
+async def btn_clipboard(bot, ctx, content=None):
+	await ctx.send(
+  	 components = [
+			Button(style= blue, 
+			emoji= "📋", 
+			label= "Copiar", 
+			custom_id = "clipboard")]
+			)
+	interaction = await bot.wait_for(
+		"button_click", check = lambda inter: inter.custom_id == "clipboard"
+  		)
+	if interaction is not None:
+		pc.copy(content)
+		await interaction.send(content = format_text("¡𝕮𝖔𝖕𝖎𝖆𝖉𝖔!👌", "fix"), ephemeral=False)
 
 
 # @bot.command()
-# async def select(ctx):
-#     await ctx.send(
-#         "Selects!",
-#         components=[
-#             Select(
-#                 placeholder="Select something!",
-#                 options=[
-#                     SelectOption(label="a", value="a"),
-#                     SelectOption(label="b", value="b"),
-#                 ],
-#                 custom_id="select1",
-#             )
-#         ],
-#     )
+async def select(ctx):
+    await ctx.send(
+        "Selects!",
+        components=[
+            Select(
+                placeholder="Select something!",
+                options=[
+                    SelectOption(label="a", value="a"),
+                    SelectOption(label="b", value="b"),
+                ],
+                custom_id="select1",
+            )
+        ],
+    )

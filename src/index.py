@@ -12,8 +12,6 @@ from dotenv import load_dotenv, find_dotenv
 import discord
 from discord.ext import commands
 from discord_components import (
-	Button, 
-	ButtonStyle,
 	DiscordComponents, 
 	Select, 
 	SelectOption
@@ -22,19 +20,19 @@ import asyncio
 import os
 import datetime 
 from urllib import parse, request
-import re
 import webbrowser
-from utilities.colors import * 
 from utilities.settings import DISCORD, BASE_DIR
+from utilities.formatter import format_text
 from utilities.components.embed import *
+from utilities.components.button import *
 from utilities.searcher import *
-from utilities.files import read
+from utilities.files import read, read_as_dict
 from colorama import Fore
 
 # intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", description="Este es un bot creado por EniDev911")
 
-# ready
+# ready 
 @bot.event
 async def on_ready():
 	await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Un comando"))
@@ -47,8 +45,20 @@ async def youtube(ctx, *, search):
 
 # get google
 @bot.command(name="gg")
-async def google(ctx, *, search):
+async def google(ctx, *, search:str):
 	await ctx.send(f"⚓ {google_search(search)}")
+
+# get font-awesome 
+@bot.command(name="fa")
+async def font_awesome(ctx, *, search=""):
+	result = read_as_dict("fa6/icons",search)
+	if "👻" in result:
+		await ctx.send(format_text(result, "fix"))
+		return
+
+	await ctx.send(format_text(result, "html"))
+	await btn_clipboard(bot, ctx,result)
+
 
 # get fonts
 @bot.command()
@@ -59,36 +69,17 @@ async def font(ctx, *, search: str):
 # get js references
 @bot.command(name="js")
 async def javascript(ctx, *, search: str):
-	result = search.strip()
-	try:
-		file = read('js/'+result+'.md')
+		file = read('js/'+search)
 		await ctx.send(file)
-		await ctx.message.author.send(file)
 
-	except FileNotFoundError as err:
-		await ctx.send("**No encontre coincidencia**") 
 
 # get boostrap references
 @bot.command(name="bs")
 async def bootstrap(ctx, *, search: str):
-	result = search.strip()
-	try:
-		file = read('bs/'+result+'.md')
+		file = read('bs/'+search)
 		await ctx.send(file)
 
-	except FileNotFoundError as err:
-		await ctx.send("**No encontre coincidencia**") 
 
-
-@bot.command()
-async def env(ctx):
-	# file = read('fonts/firacode.md')
-	#emb = embed_bootstrap
-	#print(emb.to_dict())
-	#discord.Embed.from_dict(embed_dict)
-	#f = filedialog.askopenfilename(initialdir="/")
-	#await ctx.send(file=discord.File(f))
-	pass
 
 @bot.command(name="info")
 async def info_server(ctx):
@@ -107,16 +98,7 @@ async def playlist(ctx):
 
 @bot.command()
 async def ping(ctx):
-	await ctx.send(f"🏓 pong con {str(round(bot.latency, 2))} de latencia")
-
-
-@bot.event
-async def on_select_option(interaction):
-	if interaction.values[0] == "prompt":
-		print("prompt")
-    
-	await interaction.respond(content=f"{interaction.values[0]} selected!") 
-
+	await ctx.send(format_text(f"🏓 pong con {str(round(bot.latency, 2))} de latencia", "fix"))
 
 
 

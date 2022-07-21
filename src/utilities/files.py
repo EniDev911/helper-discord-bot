@@ -1,14 +1,34 @@
 import os
 from pydoc import doc
 from .settings import PAPERS
-import zipfile     
+from .formatter import format_text
+
+# ===== read document and convert to dict
+def read_as_dict(source:str,query:str, ext:str=".txt"):
+	query = query.strip().replace(" ", "").lower()
+	try:
+		with open(os.path.join(PAPERS,source+ext)) as f:
+			a = { k: v for line in f for (k, v) in [line.strip().split(None, 1)]}
+		if query == "":
+			file_clean = ""
+			for k, v in a.items():
+				file_clean += k+"\n"
+			return file_clean
+		
+		return a[query]
+
+	except FileNotFoundError as err:
+		print(err)
+		return f"No encontraré coincidencia de => '{query.upper()}' 👻"
+	except KeyError as e:
+		return f"No encontraré coincidencia de => '{query.upper()}' 👻"
+
 
 # ===== read and clean document
-def read(document: str):
+def read(source: str, document: str, ext:str="txt",format:str="html"):
 	doc = document.strip().replace(" ", "").lower()
-	ext = ".md"
 	try:
-		with open(os.path.join(PAPERS, doc+ext) ,'r', encoding='utf-8') as file:
+		with open(os.path.join(PAPERS,source,doc+"."+ext) ,'r', encoding='utf-8') as file:
 			file_clean = ""
 			for readline in file:
 				line_strip = readline.lstrip("\n")
@@ -17,4 +37,4 @@ def read(document: str):
 
 	except FileNotFoundError as err:
 		print(err)
-		return "**No encontre coincidencia**"
+		return format_text(f"No encontraré coincidencia de => '{document.upper()}' 👻", "fix")
