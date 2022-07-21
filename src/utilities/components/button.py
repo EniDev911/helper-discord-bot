@@ -28,8 +28,8 @@ async def btn_clipboard(bot, ctx, content=None):
 		"button_click", check = lambda inter: inter.custom_id == "clipboard"
   		)
 	if interaction is not None:
-		pc.copy(content)
 		await interaction.send(content = format_text("¡𝕮𝖔𝖕𝖎𝖆𝖉𝖔!👌", "fix"), ephemeral=False)
+		return pc.copy(content)
 
 
 # @bot.command()
