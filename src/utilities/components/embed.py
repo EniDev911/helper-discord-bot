@@ -37,7 +37,11 @@ def info(ctx):
     emb_info.add_field("Servidor ID:", f"{ctx.guild.id}")
     return emb_info
 
-
+def error(ctx, message):
+    emb_error = Embed(
+        title = f"{ctx.guild.name}",
+        description = f"{message}")
+    return emb_error
 
 
 embed_bootstrap = Embed(

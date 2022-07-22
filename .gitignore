@@ -3,3 +3,5 @@ venv/
 **/__pycache__
 .google-cookie
 **/.google-cookie
+.vscode
+**/.vscode
