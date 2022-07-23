@@ -22,7 +22,7 @@ import datetime
 from urllib import parse, request
 import webbrowser
 from utilities.settings import DISCORD, BASE_DIR
-from utilities.formatter import format_text
+from utilities.formatter import format_text, format_url
 from utilities.components.embed import *
 from utilities.components.button import *
 from utilities.searcher import *
@@ -60,11 +60,17 @@ async def font_awesome(ctx, *, search=""):
 	await btn_clipboard(bot, ctx,result)
 
 
-# get fonts
-@bot.command()
-async def font(ctx, *, search: str):
-	file = read('fonts/'+search)
-	await ctx.send(file)
+# get google-fonts
+@bot.command(name="gf")
+async def google_font(ctx, *, search=""):
+	result = read_as_dict('ggfonts/fonts',search)
+	rule = read_as_dict('ggfonts/rules',search)
+	if "👻" in result:
+		await ctx.send(format_text(result, "fix"))
+		return
+		
+	await ctx.send(format_text(format_url(result, rule, "css"),"css"))
+	await btn_clipboard(bot, ctx,format_url(result, rule, "css"))
 
 # get js references
 @bot.command(name="js")
@@ -83,6 +89,8 @@ async def bootstrap(ctx, *, search: str):
 
 @bot.command(name="info")
 async def info_server(ctx):
+
+	await ctx.send('https://raw.githubusercontent.com/EniDev911/assets/main/png/logo/logo_con_bg.png')
 	await ctx.send(embed=info(ctx))
 
 
