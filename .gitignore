@@ -1,5 +1,7 @@
 venv/
 .env
+**/.env
+__pychache__
 **/__pycache__
 .google-cookie
 **/.google-cookie
