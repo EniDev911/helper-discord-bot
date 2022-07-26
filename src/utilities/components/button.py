@@ -30,20 +30,3 @@ async def btn_clipboard(bot, ctx, content=None):
 	if interaction is not None:
 		await interaction.send(content = format_text("¡𝕮𝖔𝖕𝖎𝖆𝖉𝖔!👌", "fix"), ephemeral=False)
 		return pc.copy(content)
-
-
-# @bot.command()
-async def select(ctx):
-    await ctx.send(
-        "Selects!",
-        components=[
-            Select(
-                placeholder="Select something!",
-                options=[
-                    SelectOption(label="a", value="a"),
-                    SelectOption(label="b", value="b"),
-                ],
-                custom_id="select1",
-            )
-        ],
-    )

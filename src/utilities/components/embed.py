@@ -29,8 +29,7 @@ class Embed:
 def info(ctx):
     emb_info =  Embed(
     title = f"{ctx.guild.name}",
-    description = "Servidor para ayudar y jugar",
-    color=orange)
+    description = "Servidor para ayudar y jugar")
     emb_info.create(f"{ctx.guild.owner}", f"{ctx.guild.icon_url}")
     emb_info.add_field("Servidor creado el:", f"{ctx.guild.created_at.strftime('%Y-%m-%d')}")
     emb_info.add_field("Servidor Región:", f"{ctx.guild.region}")
@@ -50,22 +49,3 @@ embed_bootstrap = Embed(
     url = 'https://raw.githubusercontent.com/EniDev911/assets/main/galery/svg/logos/bootstrap-5.svg')
 embed_bootstrap.create("bootstrap", "bootstrap-5.png")
 embed_bootstrap.add_field("example", "Test value", False)
-
-# for field in embed_dict['fields']:
-#     if field['name'] == user_input['field name']:
-#         field['value'] = user_input['field value']
-
-# # Converting the embed to a `discord.Embed` obj
-# edited_embed = discord.Embed.from_dict(embed_dict)
-
-# # Editing the message
-# await message.edit(embed=edited_embed)
-
-# embed.set_footer(text='This is a footer')
-# embed.set_image(url='https://badges.aleen42.com/src/codepen.svg')
-# embed.set_thumbnail(url='https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/96/000000/external-multi-platform-online-code-editor-and-open-source-learning-service-logo-shadow-tal-revivo.png')
-# embed.set_author(name='Codepen', icon_url='https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-Black-Large.png')
-# embed.add_field(name='Field `localstorage`', value=file, inline=False)
-# embed.add_field(name='Field `localstorage`', value='```html\n<h1>HelloWorld</h1>\n```', inline=False)
-# embed.add_field(name='Field name', value='Field value', inline=True)
-# embed.add_field(name='Field name', value='Field value', inline=True)

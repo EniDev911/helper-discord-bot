@@ -1,0 +1,1 @@
+getcwd os.getcwd() #'/home/user/python/'

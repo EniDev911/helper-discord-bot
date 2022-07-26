@@ -16,3 +16,4 @@ def format_url(url:str="", rule:str="", format:str=None):
 		return f"@import url('{url}');\n{body}"
 	elif format == "html":
 		return f"<link href='{url}' rel='stylesheet'>"
+

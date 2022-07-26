@@ -1,14 +1,10 @@
 #---------------------------------------
-#        Module: main										
+#        Module: index										
 #        Author: Marco Contreras		
-#         Email: enidev911@gmail.com 	
-# 										
-#     Copyright: (c) EniDev911			
-#       Licence: GPL 3.0 				
+#         Email: enidev911@gmail.com 				
 #---------------------------------------
 
 from dotenv import load_dotenv, find_dotenv
-#from tkinter import filedialog problem with heroku
 import discord
 from discord.ext import commands
 from discord_components import (
@@ -59,7 +55,6 @@ async def font_awesome(ctx, *, search=""):
 	await ctx.send(format_text(result, "html"))
 	await btn_clipboard(bot, ctx,result)
 
-
 # get google-fonts
 @bot.command(name="gf")
 async def google_font(ctx, *, search=""):
@@ -78,6 +73,13 @@ async def javascript(ctx, *, search: str):
 		file = read('js/'+search)
 		await ctx.send(file)
 
+
+# get python references
+@bot.command(name="python")
+async def python(ctx, *, search: str):
+	result = read_as_dict("fa6/icons",search)
+
+	
 
 # get boostrap references
 @bot.command(name="bs")
