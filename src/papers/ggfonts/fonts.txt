@@ -2,6 +2,7 @@ firacode https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&dis
 jetbrainsmono https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap
 kaushanscript https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap
 montserrat https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap
+mousememoirs https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap
 opensans https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap
 overlock https://fonts.googleapis.com/css2?family=Overlock:wght@400;700&display=swap
 oxygen https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400&display=swap

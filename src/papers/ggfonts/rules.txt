@@ -2,6 +2,7 @@ firacode 'Fira Code', monospace;
 jetbrainsmono 'JetBrains Mono', monospace, sans-serif;
 kaushanscript 'Kaushan Script', cursive, sans-serif;
 montserrat 'Montserrat', sans-serif;
+mousememoirs 'Mouse Memoirs', sans-serif;
 opensans 'Open Sans', sans-serif;
 overlock 'Overlock', cursive, sans-serif;
 oxygen 'Oxygen', sans-serif;

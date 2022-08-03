@@ -17,7 +17,7 @@ import os
 import datetime 
 from urllib import parse, request
 import webbrowser
-from utilities.settings import DISCORD, BASE_DIR
+from utilities.settings import DISCORD, BASE_DIR, API_KEY
 from utilities.formatter import format_text, format_url
 from utilities.components.embed import *
 from utilities.components.button import *
@@ -48,24 +48,28 @@ async def google(ctx, *, search:str):
 @bot.command(name="fa")
 async def font_awesome(ctx, *, search=""):
 	result = read_as_dict("fa6/icons",search)
+	faurl = read_as_dict("fa6/details", search)
 	if "👻" in result:
 		await ctx.send(format_text(result, "fix"))
 		return
 
 	await ctx.send(format_text(result, "html"))
-	await btn_clipboard(bot, ctx,result)
+	await btn_fa_detail(bot, ctx, faurl
+	)
 
 # get google-fonts
 @bot.command(name="gf")
 async def google_font(ctx, *, search=""):
 	result = read_as_dict('ggfonts/fonts',search)
 	rule = read_as_dict('ggfonts/rules',search)
+
 	if "👻" in result:
 		await ctx.send(format_text(result, "fix"))
 		return
 		
 	await ctx.send(format_text(format_url(result, rule, "css"),"css"))
 	await btn_clipboard(bot, ctx,format_url(result, rule, "css"))
+
 
 # get js references
 @bot.command(name="js")
@@ -110,10 +114,10 @@ async def playlist(ctx):
 async def ping(ctx):
 	await ctx.send(format_text(f"🏓 pong con {str(round(bot.latency, 2))} de latencia", "fix"))
 
-
-
 if __name__ == "__main__":
 	print(DISCORD["version"])
 	load_dotenv(find_dotenv())
 	DiscordComponents(bot)
+	API_KEY["google"] = os.environ["KEY_GOOGLE"]
+
 	bot.run(os.environ["DISCORD_TOKEN"])
