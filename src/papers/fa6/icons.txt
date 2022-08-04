@@ -51,7 +51,6 @@ linkedin-in <i class="fa-brands fa-linkedin-in"></i>
 linux <i class="fa-brands fa-linux"></i>
 locationdot <i class="fa-regular fa-location-dot"></i>
 map <i class="fa-solid fa-map"></i>
-map.r <i class="fa-regular fa-map"></i>
 map-pin.s <i class="fa-solid fa-map-pin"></i>
 mobile-screen-button <i class="fa-solid fa-mobile-screen-button"></i>
 mug-saucer.s <i class="fa-solid fa-mug-saucer"></i>
