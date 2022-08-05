@@ -64,7 +64,9 @@ def pokemon(ctx, pkm):
     description = translator.translate(description, dest="es")
 
     for poketype in pokemon.types:
-        if poketype.type.names[5].name.lower() == 'dragón':
+        if poketype.type.names[5].name.lower() == 'agua':
+            types +) '🌊 '+poketype.type.names[5].name
+        elif poketype.type.names[5].name.lower() == 'dragón':
             types += '🐲 '+poketype.type.names[5].name+' '
         elif poketype.type.names[5].name.lower() == 'eléctrico':
             types += '⚡ '+poketype.type.names[5].name+' '
@@ -81,7 +83,6 @@ def pokemon(ctx, pkm):
         elif poketype.type.names[5].name.lower() == 'tierra':
             types += '🟤 '+poketype.type.names[5].name+' '
         elif poketype.type.names[5].name.lower() == 'planta':
-            color = 0x36f26e
             types += '🌱 '+poketype.type.names[5].name+' '
         elif poketype.type.names[5].name.lower() == 'psíquico':
             types += '🌀 '+poketype.type.names[5].name+' '
@@ -90,7 +91,9 @@ def pokemon(ctx, pkm):
         elif poketype.type.names[5].name.lower() == 'lucha':
             types += '🥊 '+poketype.type.names[5].name+' '
 
-    if 'dragón' in types.lower():
+    if 'agua' in types.lower():
+        color = 0x1e8df6
+    elif 'dragón' in types.lower():
         color = 0x7553ee
     elif 'eléctrico' in types.lower():
         color = 0xf2eb07
@@ -104,12 +107,12 @@ def pokemon(ctx, pkm):
         color = 0xbababa
     elif 'tierra' in types.lower():
         color = 0xffd375
-    elif 'agua' in types.lower():
-        color = 0x1e8df6
     elif 'normal' in types.lower():
         color = 0xffffff
     elif 'lucha' in types.lower():
         color = 0x885959
+    elif 'planta' in types.lower():
+        color = 0x36f26e
     elif 'psíquico' in types.lower():
         color = 0xdf77d6
     elif 'bicho' in types.lower():
