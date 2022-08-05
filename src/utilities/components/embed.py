@@ -119,7 +119,7 @@ def pokemon(ctx, pkm):
 
     emb_pokemon =  Embed(
     title = f"{pkm.capitalize()}",
-    description = f"{description}",
+    description = f"{description.text}",
     color=color)
     emb_pokemon.create(thumbnail=f"{pbAnimate+str(pokemon.id)+ext}", image=f"{pbAnimateBack+str(pokemon.id)+ext}")
     emb_pokemon.add_field("Altura:", f"{pokemon.height}")
