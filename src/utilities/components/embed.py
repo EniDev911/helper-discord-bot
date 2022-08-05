@@ -98,7 +98,6 @@ def pokemon(ctx, pkm):
         color = 0xfb1d04
     elif 'hielo' in types.lower():
         color = 0x7dcbf2
-
     elif 'veneno' in types.lower():
         color = 0xa12680
     elif 'roca' in types.lower():
@@ -106,7 +105,6 @@ def pokemon(ctx, pkm):
     elif 'tierra' in types.lower():
         color = 0xffd375
     elif 'agua' in types.lower():
-        types = '💧 '+types
         color = 0x1e8df6
     elif 'normal' in types.lower():
         color = 0xffffff
