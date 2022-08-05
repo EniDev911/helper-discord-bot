@@ -47,16 +47,8 @@ async def google(ctx, *, search:str):
 # get pokemon pokebase
 @bot.command(name="pb")
 async def pokebase(ctx,*, search: str):
-	#await ctx.send(pokemon.sprites.front_default)
 	await ctx.send(embed=pokemon(ctx, search))
 
-#s1.url
-#'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png'
-#s2 = pb.SpriteResource('pokemon', 1, other=True, official_artwork=True)
-#s2.path
-#'/home/user/.cache/pokebase/sprite/pokemon/other-sprites/official-artwork/1.png'
-#s3 = pb.SpriteResource('pokemon', 3, female=True, back=True)
-#s3.img_data
 
 # get images pexels
 @bot.command(name="pxl")
@@ -100,7 +92,6 @@ async def google_font(ctx, *, search=""):
 		return
 		
 	await ctx.send(format_text(format_url(result, rule, "css"),"css"))
-	await btn_clipboard(bot, ctx,format_url(result, rule, "css"))
 
 
 # get js references
