@@ -2,6 +2,8 @@ import discord
 import datetime
 from ..url import LOGO, pbAnimate, pbAnimateBack
 import pokebase as pb
+from googletrans import Translator  
+
 
 class Embed:
     def __init__(self, title: str, description: str,url=None, color=0x1f6e9e):
@@ -45,6 +47,8 @@ def error(ctx, message):
     return emb_error
 
 def pokemon(ctx, pkm):
+    translator = Translator()  
+
     # 1: rojo, 2: verde
     colores = [0xfb1d04, 0x36f26e, 0xa12680, 0xffd375]
     color = 0xfb1d04
@@ -52,8 +56,12 @@ def pokemon(ctx, pkm):
     pokemon = pb.pokemon(pkm.lower())
     abilities = ""
     types = ""
+    description = ""
     for ability in pokemon.abilities:
         abilities += ability.ability.names[5].name+', '
+        description += ability.ability.effect_entries[1].short_effect
+
+    description = translator.translate(description, dest="es")
 
     for poketype in pokemon.types:
         if poketype.type.names[5].name.lower() == 'dragón':
@@ -111,7 +119,7 @@ def pokemon(ctx, pkm):
 
     emb_pokemon =  Embed(
     title = f"{pkm.capitalize()}",
-    description = f"",
+    description = f"{description}",
     color=color)
     emb_pokemon.create(thumbnail=f"{pbAnimate+str(pokemon.id)+ext}", image=f"{pbAnimateBack+str(pokemon.id)+ext}")
     emb_pokemon.add_field("Altura:", f"{pokemon.height}")

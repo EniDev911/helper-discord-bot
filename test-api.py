@@ -1,21 +1,36 @@
-import pokebase as pb
-#https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/
-# pokemon/versions/generation-v/black-white/animated/4.gif
+# import pokebase as pb
 
-pokemon = pb.pokemon("charizard")
-print(pokemon.height)
-print(pokemon.weight)
-#print(pokemon.id)
-s1 = pb.SpriteResource('pokemon', pokemon.id)
-abilities = ""
-types = ""
-for ability in pokemon.abilities:
-  #print(ability.ability.names[5].name)
-#  print(ability.ability.effect_entries[1].effect)
-  abilities += ability.ability.names[5].name+', '
-  print(ability.ability.effect_entries[1].effect)
+# from googletrans import Translator  
+  
+# translator = Translator()  
+# #translate_text = translator.translate('Hola mundo!', src='es', dest='en')  
+# #print(translate_text)
+# # The quick brown fox  ->  빠른 갈색 여우
+# # jumps over  ->  이상 점프
+# # the lazy dog  ->  게으른 개
+# #https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/
+# # pokemon/versions/generation-v/black-white/animated/4.gif
 
+# pokemon = pb.pokemon("charizard")
+# #print(pokemon.height)
+# #print(pokemon.weight)
+# #print(pokemon.id)
+# #s1 = pb.SpriteResource('pokemon', pokemon.id)
+# abilities = ""
+# types = ""
 
+# description = ""
+# for ability in pokemon.abilities:
+# #  print(ability.ability.names[5].name)
+# #  print(ability.ability.effect_entries[1].effect)
+# #  abilities += ability.ability.names[5].name+', '
+# #  print(ability.ability.effect_entries[1].effect)
+#   description += ability.ability.effect_entries[1].short_effect
+# #print(description)
+
+# traducido = translator.translate(description, dest="es")
+# print(traducido.text)
+    
 
 #    if len(pokemon.abilities) > 1:
 #        abilities += ability.ability.name + ', '
