@@ -1,17 +1,13 @@
 #---------------------------------------
 #        Module: index										
 #        Author: Marco Contreras		
-#         Email: enidev911@gmail.com 				
+#         Email: enidev911@gmail.com		
 #---------------------------------------
 
 from dotenv import load_dotenv, find_dotenv
 import discord
 from discord.ext import commands
-from discord_components import (
-	DiscordComponents, 
-	Select, 
-	SelectOption
-)
+from discord_components import DiscordComponents
 import asyncio
 import os
 import datetime 
@@ -24,14 +20,18 @@ from utilities.components.button import *
 from utilities.searcher import *
 from utilities.files import read, read_as_dict
 from colorama import Fore
+from pexels_api import API
+import pokebase as pb
+
 
 # intents = discord.Intents.all()
+
 bot = commands.Bot(command_prefix="!", description="Este es un bot creado por EniDev911")
 
 # ready 
 @bot.event
 async def on_ready():
-	await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Un comando"))
+	await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Un comando (Ej:!fa discord)"))
 	print(f"{Fore.YELLOW}Bot logged as {Fore.RED}{bot.user}")
 
 # get youtube
@@ -39,10 +39,42 @@ async def on_ready():
 async def youtube(ctx, *, search):
 	await ctx.send(youtube_search(search))
 
-# get google
+# get page google
 @bot.command(name="gg")
 async def google(ctx, *, search:str):
 	await ctx.send(f"⚓ {google_search(search)}")
+
+# get pokemon pokebase
+@bot.command(name="pb")
+async def pokebase(ctx,*, search: str):
+	#await ctx.send(pokemon.sprites.front_default)
+	await ctx.send(embed=pokemon(ctx, search))
+
+#s1.url
+#'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png'
+#s2 = pb.SpriteResource('pokemon', 1, other=True, official_artwork=True)
+#s2.path
+#'/home/user/.cache/pokebase/sprite/pokemon/other-sprites/official-artwork/1.png'
+#s3 = pb.SpriteResource('pokemon', 3, female=True, back=True)
+#s3.img_data
+
+# get images pexels
+@bot.command(name="pxl")
+async def pexels(ctx, *, search:str):
+	PEXELS_API_KEY = API_KEY['pexels']
+	api = API(PEXELS_API_KEY)
+	api.search(search, page=1, results_per_page=5)
+	photos = api.get_entries()
+	urls = []
+	for photo in photos:
+  	# Print photographer
+		print('Photographer: ', photo.photographer)
+  	# Print url
+		print('Photo url: ', photo.url)
+		urls.append(photo.original)
+  	# Print original size url
+		print('Photo original size: ', photo.original)
+	await ctx.send(urls[0])
 
 # get font-awesome 
 @bot.command(name="fa")
@@ -92,11 +124,9 @@ async def bootstrap(ctx, *, search: str):
 		await ctx.send(file)
 
 
-
+# Server info
 @bot.command(name="info")
 async def info_server(ctx):
-
-	await ctx.send('https://raw.githubusercontent.com/EniDev911/assets/main/png/logo/logo_con_bg.png')
 	await ctx.send(embed=info(ctx))
 
 
@@ -119,5 +149,5 @@ if __name__ == "__main__":
 	load_dotenv(find_dotenv())
 	DiscordComponents(bot)
 	API_KEY["google"] = os.environ["KEY_GOOGLE"]
-
+	API_KEY["pexels"] = os.environ["KEY_PEXELS"]
 	bot.run(os.environ["DISCORD_TOKEN"])

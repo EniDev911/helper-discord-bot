@@ -9,4 +9,5 @@ LOGO = "https://raw.githubusercontent.com/EniDev911/assets/main/galery/png/logos
 googleFonts = "https://www.googleapis.com/webfonts/v1/webfonts?key="
 popularity = "https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key="
 
-
+pbAnimateBack = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/back/"
+pbAnimate = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/"

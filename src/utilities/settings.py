@@ -9,9 +9,12 @@ PAPERS = path.join(BASE_DIR, 'src', 'papers')
 # KEYS
 API_KEY = {}
 
+# Other 
 DISCORD = {
 	"version" : discord.version_info
 }
+
+message = ""
 
 
 
