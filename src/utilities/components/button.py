@@ -9,7 +9,6 @@ from discord_components import (
 	SelectOption
 )
 import asyncio
-import pyperclip as pc
 from ..formatter import format_text
 
 blue = ButtonStyle.blue
