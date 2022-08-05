@@ -65,7 +65,7 @@ def pokemon(ctx, pkm):
 
     for poketype in pokemon.types:
         if poketype.type.names[5].name.lower() == 'agua':
-            types +) '🌊 '+poketype.type.names[5].name
+            types += '🌊 '+poketype.type.names[5].name
         elif poketype.type.names[5].name.lower() == 'dragón':
             types += '🐲 '+poketype.type.names[5].name+' '
         elif poketype.type.names[5].name.lower() == 'eléctrico':
