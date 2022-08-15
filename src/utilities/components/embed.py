@@ -29,7 +29,6 @@ class Embed:
         return self.embed.to_dict()
 
 
-
 def info(ctx):
     emb_info =  Embed(
     title = f"{ctx.guild.name}",

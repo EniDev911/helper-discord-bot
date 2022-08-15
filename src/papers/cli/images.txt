@@ -1,0 +1,2 @@
+echo https://raw.githubusercontent.com/EniDev911/assets/main/png/cli/echo/echo-color1.png
+mkdir https://raw.githubusercontent.com/EniDev911/assets/main/png/cli/mkdir/mkdir-parents-1.png

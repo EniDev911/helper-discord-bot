@@ -34,10 +34,23 @@ async def on_ready():
 	await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Un comando (Ej:!fa discord)"))
 	print(f"{Fore.YELLOW}Bot logged as {Fore.RED}{bot.user}")
 
+# get cli
+@bot.command(name="cli")
+async def tools_cli(ctx, *, search):
+	result = read("cli/",search, "md")
+	image = read_as_dict("cli/images",search)
+	if "👻" in result:
+		await ctx.send(format_text(result, "fix"))
+		return
+	await ctx.send(result)
+	await ctx.send(image)
+
+
 # get youtube
 @bot.command(name="yt")
 async def youtube(ctx, *, search):
 	await ctx.send(youtube_search(search))
+
 
 # get page google
 @bot.command(name="gg")
@@ -78,8 +91,7 @@ async def font_awesome(ctx, *, search=""):
 		return
 
 	await ctx.send(format_text(result, "html"))
-	await btn_fa_detail(bot, ctx, faurl
-	)
+	await btn_fa_detail(bot, ctx, faurl)
 
 # get google-fonts
 @bot.command(name="gf")
